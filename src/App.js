@@ -1,4 +1,6 @@
-import './App.css';
+// import './App.css';
+import ListItems from "./tryoutCode/ListItems";
+import MyInfo from "./tryoutCode/FunctionComponent"
 
 function App() {
   return (
@@ -9,6 +11,11 @@ function App() {
       <p>
         This is the react app.
       </p>
+        <hr/>
+        <ListItems />
+        
+        <MyInfo />
+
     </div>
   );
 }
