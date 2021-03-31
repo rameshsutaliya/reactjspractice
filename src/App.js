@@ -1,21 +1,14 @@
-// import './App.css';
-import ListItems from "./tryoutCode/ListItems";
-import MyInfo from "./tryoutCode/FunctionComponent"
+import './App.css';
+import MyHeader from "./components/MyHeader";
+import Main from "./components/Main";
+import MyFooter from "./components/MyFooter";
 
 function App() {
   return (
     <div className="App">
-      <h1>
-        Hello World!
-      </h1>
-      <p>
-        This is the react app.
-      </p>
-        <hr/>
-        <ListItems />
-        
-        <MyInfo />
-
+      <MyHeader />
+      <Main />
+      <MyFooter />
     </div>
   );
 }
