@@ -1,0 +1,37 @@
+name: API Scheduler
+
+on:
+  schedule:
+    # Runs every 5 minutes (GitHub Actions minimum interval)
+    # Note: GitHub Actions does not support seconds in cron schedules
+    - cron: "*/5 * * * *"
+
+  # Allows manual triggering from the Actions tab
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  call-api:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+
+    steps:
+      - name: Call API Endpoint
+        run: |
+          echo "Calling API endpoint..."
+          response=$(curl -s -w "\nHTTP_STATUS:%{http_code}" \
+            "https://idp-mbgg3uw5ra-uc.a.run.app/api/github/branch-candidate?repository=spendflo/spendflo-api")
+
+          http_status=$(echo "$response" | grep "HTTP_STATUS:" | cut -d: -f2)
+          body=$(echo "$response" | sed '/HTTP_STATUS:/d')
+
+          echo "HTTP Status: $http_status"
+          echo "Response Body:"
+          echo "$body"
+
+          if [ "$http_status" -ne 200 ]; then
+            echo "API call failed with status $http_status"
+            exit 1
+          fi
